@@ -332,7 +332,7 @@ def parse_xyz_file(file):
     return atoms
 
 
-# In[31]:
+# In[1]:
 
 
 def gen_inp(atoms, args, file):
@@ -357,7 +357,7 @@ def gen_inp(atoms, args, file):
             # Proceed with the rest of your code
 
             # Combine the contents of user inputs to create Gaussian input                    
-            combined_content = f"%mem={memory}\n" + f"%nprocshared={proc}\n" + f"# {func}/{basis} " + f"{solvent} " + f"{keys}\n" + f"{title}\n" + "".join(atoms) + "\n\n"
+            combined_content = f"%mem={memory}\n" + f"%nprocshared={proc}\n" + f"# {func}/{basis} " + f"{solvent} " + f"{keys}\n" + f"{title}\n" + f"{charge_mult}" + "".join(atoms) + "\n\n"
             # Create the output file name
             base_name = os.path.splitext(file)[0]
             output_file = base_name + ".inp"
