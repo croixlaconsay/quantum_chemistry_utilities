@@ -316,17 +316,20 @@ def parse_arguments():
 def parse_xyz_file(file):
     with open(file, 'r') as f:
         lines = f.readlines()
-        
-    atoms = []
 
-    for line in lines[2:]:
-        atoms.append(line.strip())
+    atoms = []
+    for line in lines[2:]:  # Skip the first two lines (number of atoms and comment)
+        parts = line.strip().split()
+        if len(parts) == 4:  # Ensure we have an atom symbol and 3 coordinates
+            atom_symbol = parts[0]
+            coordinates = [coord.strip() for coord in parts[1:]]
+            formatted_line = f"{atom_symbol:<2} {coordinates[0]:>14} {coordinates[1]:>14} {coordinates[2]:>14}\n"
+            atoms.append(formatted_line)
 
     print("Atoms collected: ")
-    for atom in atoms:
-        print(atom.strip())
+    print(''.join(atoms))  # Print all atoms together
 
-    return atoms  # or return atoms if needed
+    return atoms
 
 
 # In[31]:
